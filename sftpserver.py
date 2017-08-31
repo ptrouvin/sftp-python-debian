@@ -313,7 +313,7 @@ if __name__ == '__main__':
     )
 
     args = parser.parse_args()
-    if os.environ.has_key('LOGLEVEL'):
+    if os.environ.get('LOGLEVEL',False):
         level = LOGGING_LEVELS.get(os.environ['LOGLEVEL'], logging.NOTSET)
     else:
         level = LOGGING_LEVELS.get(args.level, logging.NOTSET)
@@ -342,13 +342,13 @@ if __name__ == '__main__':
         parser.print_help()
         sys.exit(-1)
     
-    if os.environ.has_key('ROOT'):
+    if os.environ.get('ROOT',False):
         StubSFTPServer.ROOT=os.environ['ROOT']
     elif args.root is not None:
         StubSFTPServer.ROOT=args.root
     
     port=args.port
-    if os.environ.has_key('PORT'):
+    if os.environ.get('PORT',False):
         port=int(os.environ['PORT'])
         
     log.info("SFTP server root directory set to: %s" % StubSFTPServer.ROOT)
